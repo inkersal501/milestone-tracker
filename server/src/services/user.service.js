@@ -5,7 +5,7 @@ const signUp = async (req) => {
   const { username, email, password } = req;
 
   const existing = await userModel.findOne({ email });
-  if (existing) throw new Error("Email already exists. Try Signin.");
+  if (existing) throw new Error("Email already exists.");
 
   try {
     const user = await userModel.create({ username, email, password });

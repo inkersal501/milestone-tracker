@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { defaultState } from "../services/config";
 
 const initialState = {
+  isLogin : true,
   isLoggedin: localStorage.getItem("isLoggedin") || defaultState.auth.isLoggedin,
   user: JSON.parse(localStorage.getItem("user")) || defaultState.auth.user,
 };
@@ -10,6 +11,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
+    updateIsLogin: (state, action) => {
+      state.isLogin = action.payload;
+    },
     login: (state, action) => {
       state.user = { ...state.user, ...action.payload };
       state.isLoggedin = true;
@@ -25,5 +29,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateIsLogin } = authSlice.actions;
 export default authSlice.reducer;

@@ -13,19 +13,19 @@ const handleLogin = async (email, password) => {
       return result.data;
     }
   } catch (error) {
-    toast.error(error.response.data.error);
+    toast.error(error.response.data.message);
     return false;
   }
 };
-const handleRegister = async (req) => {
+const handleRegister = async (username, email, password) => {
   try {
-    const result = await axios.post(`${apiEndpoint}/users/signup`, { ...req });
+    const result = await axios.post(`${apiEndpoint}/users/signup`, { username, email, password });
     if (result.status === 201) {
       toast.success(result.data.message);
       return true;
     }
   } catch (error) {
-    toast.error(error.response.data.error);
+    toast.error(error.response.data.message);
     return false;
   }
 };
