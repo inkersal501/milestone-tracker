@@ -6,7 +6,9 @@ import { useState } from 'react';
 import { getMilestones } from '../services/milestone';
 import { updateMilestones } from '../store/milestoneSlice';
 import MilestoneCard from '../components/MilestoneCard';
- 
+import { MdAddCircle } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+
 function Dashboard() {
 
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ function Dashboard() {
       <div className="flex justify-between items-center mb-5">
         <h3 className='text-3xl'>Milestones</h3>
         <input type='text' id='search' className='input w-1/4' onClick={(e)=>setSearch(e.target.value)} value={search} placeholder='Search...' />
-        <button className='btn' onClick={()=>navigate("/milestone/add")}>New Milestone</button>
+        <button className='btn flex items-center gap-2' onClick={()=>navigate("/milestone/add")}><MdAddCircle size={16}/> New Milestone</button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">

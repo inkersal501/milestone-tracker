@@ -1,6 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateIsLogin } from '../store/authSlice';
+import { FiLogIn, FiLogOut } from "react-icons/fi"; 
+import { FaSignInAlt } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 function Navbar() {
     const dispatch = useDispatch();
@@ -26,21 +29,21 @@ function Navbar() {
             <Link to="/dashboard" className="text-gray-700 hover:text-primary">
               My Milestones
             </Link> 
-            <p className='text-primary'>Welcome, {user.username}</p>
+            <p className='text-primary flex items-center gap-2'><FaUserCircle size={18}/> Welcome, {user.username}</p>
             <button
               onClick={handleLogout}
-              className="btn"
+              className="btn flex items-center gap-2"
             >
-              Logout
+              <FiLogOut /> Logout
             </button>
           </>
         ) : (
           <>
-            <button onClick={()=>{dispatch(updateIsLogin(true));navigate("/")}} className="btn">
-              Login
+            <button onClick={()=>{dispatch(updateIsLogin(true));navigate("/")}} className="btn flex items-center gap-2">
+              <FiLogIn /> Login
             </button>
-            <button onClick={()=>{dispatch(updateIsLogin(false));navigate("/")}} className="btn">
-              Register
+            <button onClick={()=>{dispatch(updateIsLogin(false));navigate("/")}} className="btn flex items-center gap-2">
+              <FaSignInAlt /> Register
             </button> 
           </>
         )}
