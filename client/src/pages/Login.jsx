@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userCheck = useSelector((state) => state.auth.isLoggedin);
+  const isLoggedin = useSelector((state) => state.auth.isLoggedin);
   const isLogin  = useSelector((state) => state.auth.isLogin);
   
   const [username, setUsername] = useState("");
@@ -16,11 +16,11 @@ function Login() {
   const [password, setPassword] = useState("");
 
   useEffect(()=> {
-    if(userCheck) {
+    if(isLoggedin) {
       navigate("/dashboard");
     }
     //eslint-disable-next-line
-  }, [userCheck])
+  }, [isLoggedin])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,8 +60,8 @@ function Login() {
             </h2>
             <form onSubmit={handleSubmit}>
               {!isLogin && (
-                <div className='flex flex-col gap-1 mb-4'>
-                  <label htmlFor="username">Username</label>
+                <div className='flex flex-col mb-4'>
+                  <label htmlFor="username" className="block font-medium mb-1">Username</label>
                   <input
                     type="text"
                     id="username"
@@ -71,8 +71,8 @@ function Login() {
                   />
                 </div>
               )}
-              <div className='flex flex-col gap-1 mb-4'>
-                <label htmlFor="email">Email</label>
+              <div className='flex flex-col mb-4'>
+                <label htmlFor="email" className="block font-medium mb-1">Email</label>
                 <input
                   type="text"
                   id="email"
@@ -81,8 +81,8 @@ function Login() {
                   className='input'
                 />
               </div>
-              <div className='flex flex-col gap-1 mb-6'>
-                <label htmlFor="password">Password</label>
+              <div className='flex flex-col mb-6'>
+                <label htmlFor="password" className="block font-medium mb-1">Password</label>
                 <input
                   type="password"
                   id="password"

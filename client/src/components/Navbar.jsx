@@ -5,8 +5,7 @@ import { logout, updateIsLogin } from '../store/authSlice';
 function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { user } = useSelector((state) => state.auth);
-    const isLogin  = useSelector((state) => state.auth.isLogin);
+    const { user } = useSelector((state) => state.auth); 
 
     const handleLogout = () => {
         dispatch(logout());
@@ -24,12 +23,9 @@ function Navbar() {
       <div className="flex items-center gap-6">
         {user ? (
           <>
-            <Link to="/milestones" className="text-gray-700 hover:text-primary">
+            <Link to="/dashboard" className="text-gray-700 hover:text-primary">
               My Milestones
-            </Link>
-            <Link to="/community" className="text-gray-700 hover:text-primary">
-              Community Tips
-            </Link>
+            </Link> 
             <p className='text-primary'>Welcome, {user.username}</p>
             <button
               onClick={handleLogout}
