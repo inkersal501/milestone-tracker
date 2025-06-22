@@ -44,27 +44,27 @@ Built with authentication, milestone sharing, and tip collaboration features.
 - CORS 
 
 ---
+## 📁 Folder Structure
 
-## Folder Structure
-
+```bash
 client/
-├── src/
-  ├── components/
-  ├── pages/
-  ├── services/
-  ├── store/
-  ├── App.jsx
-  └── main.jsx
+└── src/
+    ├── components/       # Reusable components
+    ├── pages/            # Page-level Components
+    ├── services/         # API handler functions
+    ├── store/            # Redux slices and store setup
+    ├── App.jsx
+    └── main.jsx
 
 server/
-├── src/
-  ├── controllers/
-  ├── routes/
-  ├── models/
-  ├── middlewares/
-  |── services/
-  └── index.js
-  
+└── src/
+    ├── controllers/      # Route handler
+    ├── routes/           # route definitions
+    ├── models/           # Mongoose models
+    ├── services/         # DB/business logic helpers
+    ├── middlewares/      # Auth handler
+    └── index.js
+``` 
 ---
 
 ### Backend Setup
