@@ -1,4 +1,4 @@
-import { milestoneModel } from "../models/index.js";
+import { milestoneModel, tipsModel } from "../models/index.js";
 
 const create = async (data) => {
     try {
@@ -16,8 +16,22 @@ const getAll = async (userId) => {
         throw new Error("Erro fetching milestones.");
     }
 };
-const addTips = async () => {
-      
+const addTips = async (data) => {
+    try {
+        const tips = await tipsModel.create(data);
+        return { tips };
+    } catch (error) {
+        throw new Error("Failed to add tips. Try again.");
+    }
 };
 
-export default { create, getAll, addTips };
+const getTips = async (milestoneId, userId) => {
+    try {
+        const tips = await tipsModel.find({ milestoneId, userId }); 
+        return [...tips];
+    } catch (error) {
+        throw new Error("Erro fetching tips.");
+    }
+};
+
+export default { create, getAll, addTips, getTips };

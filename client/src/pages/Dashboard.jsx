@@ -39,12 +39,20 @@ function Dashboard() {
     //eslint-disable-next-line
   }, []);
   
-
+  useEffect(()=> {
+    if(search.length > 0) {
+       const filtered =  milestoneData.filter((milestone) => milestone.title.toLowerCase().includes(search.toLowerCase()));
+      setMilestones(filtered);
+    }else{
+      setMilestones(milestoneData);
+    }
+    //eslint-disable-next-line
+  }, [search])
   return (
     <div className='p-5 md:p-7'>
       <div className="flex justify-between items-center mb-5">
         <h3 className='text-3xl'>Milestones</h3>
-        <input type='text' id='search' className='input w-1/4' onClick={(e)=>setSearch(e.target.value)} value={search} placeholder='Search...' />
+        <input type='text' id='search' className='input w-1/4' onChange={(e)=>setSearch(e.target.value)} value={search} placeholder='Search...' />
         <button className='btn flex items-center gap-2' onClick={()=>navigate("/milestone/add")}><MdAddCircle size={16}/> New Milestone</button>
       </div>
 
