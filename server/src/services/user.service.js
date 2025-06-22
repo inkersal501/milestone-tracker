@@ -4,12 +4,16 @@ import generateToken from "./token.service.js";
 const signUp = async (req) => {
   const { username, email, password } = req;
 
-  const existing = await userModel.findOne({ email });
-  if (existing) throw new Error("Email already exists.");
+  const existing1 = await userModel.findOne({ username });
+  if (existing1) throw new Error("Username already exists.");
 
+  const existing2 = await userModel.findOne({ email });
+  if (existing2) throw new Error("Email already exists.");
+  
   try {
-    const user = await userModel.create({ username, email, password });
-    return true;
+    const user = await userModel.create({ username, email, password }); 
+    const token = generateToken(user._id);
+    return { email, username: user.username, token };
   } catch (err) {
     throw new Error("User creation failed: " + err.message);
   }
@@ -26,8 +30,8 @@ const signIn = async ({ email, password }) => {
   return { email, username: user.username, token };
 };
 
-const getUser = async (req) => {
-  const user = await userModel.findById(req.userId).lean();
+const getUser = async (userId) => {
+  const user = await userModel.findById(userId).lean();
   if (!user) throw new Error("User not found.");
   return user;
 };

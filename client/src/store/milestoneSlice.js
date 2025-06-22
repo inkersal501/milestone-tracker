@@ -2,13 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const milestoneSlice = createSlice({
     name: "milestone",
-    initialState: {data: []},
+    initialState: {userMilestones: [], allMilestones: [], tips: []},
     reducers: {
-        updateMilestones: (state, action) => {
-            state.data = action.payload;
+        updateuserMilestones: (state, action) => {
+            state.userMilestones = action.payload;
+        },
+        updateAllMilestones: (state, action) => {
+            state.allMilestones = action.payload;
+        },
+        updateTips: (state, action) => {
+            state.tips = action.payload;
         },
     },
 });
 
-export const { updateMilestones } = milestoneSlice.actions;
+export const { updateuserMilestones, updateAllMilestones, updateTips } = milestoneSlice.actions;
 export default milestoneSlice.reducer;

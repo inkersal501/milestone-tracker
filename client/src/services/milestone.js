@@ -18,9 +18,9 @@ const handleAddMilestone = async (title, date, notes, userToken ) => {
         return false;
     }
 }
-const getMilestones = async (userToken) => { 
+const getMilestones = async (userToken, type) => { 
     try {
-        const result = await axios.get(`${apiEndpoint}/milestones`, {
+        const result = await axios.get(`${apiEndpoint}/milestones/${type}`, {
             headers: {
                 Authorization: `Bearer ${userToken}`
             }
@@ -34,7 +34,7 @@ const getMilestones = async (userToken) => {
     }
 };
 
-const handleAddTips = async (content, milestoneId, userToken) => {
+const handleAddTips = async (milestoneId, content, userToken) => {
     try {
         const result = await axios.post(`${apiEndpoint}/milestones/${milestoneId}/tips`, { content }, {
             headers: {
@@ -51,14 +51,14 @@ const handleAddTips = async (content, milestoneId, userToken) => {
     }   
 };
 
-const getTips = async (milestoneId, userToken) => { 
+const getTips = async (milestoneId, userToken) => {
     try {
         const result = await axios.get(`${apiEndpoint}/milestones/${milestoneId}/tips`, {
             headers: {
                 Authorization: `Bearer ${userToken}`
             }
         });
-        if (result.status === 200) { 
+        if (result.status === 200) {
             return result.data;
         }
     } catch (error) {

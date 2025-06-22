@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authSlice";
 import {handleAddMilestone} from "../services/milestone";
 import { useNavigate } from "react-router-dom";
-import { updateMilestones } from "../store/milestoneSlice";
 
 function Addmilestone() {
 
     const {isLoggedin, user} = useSelector((state) => state.auth); 
-    const milestones = useSelector((state) => state.milestone.data || []);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [title, setTitle] = useState("");
@@ -30,8 +28,7 @@ function Addmilestone() {
         if (!title || !date) {
             return toast.error("Title and Date are required");
         }else{
-            const result =  await handleAddMilestone(title, date, notes, user.token);
-            dispatch(updateMilestones([...milestones, result]));
+            await handleAddMilestone(title, date, notes, user.token); 
             navigate("/dashboard"); 
         }  
     };

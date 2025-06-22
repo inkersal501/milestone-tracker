@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authSlice";
 import { useState } from 'react';
 import { getMilestones } from '../services/milestone';
-import { updateAllMilestones } from '../store/milestoneSlice';
+import { updateuserMilestones } from '../store/milestoneSlice';
 import MilestoneCard from '../components/MilestoneCard';
 import { MdAddCircle } from "react-icons/md"; 
 
-function Dashboard() {
+function Milestones() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLoggedin, user} = useSelector((state) => state.auth); 
-  const milestoneData = useSelector((state) => state.milestone.allMilestones);
+  const milestoneData = useSelector((state) => state.milestone.userMilestones);
   const [milestones, setMilestones] = useState(milestoneData || []);
   const [search, setSearch] = useState('');
 
@@ -27,10 +27,10 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getMilestones(user.token, "all");
+      const result = await getMilestones(user.token, "user");
       if(result) {
         setMilestones(result);
-        dispatch(updateAllMilestones([...result]));
+        dispatch(updateuserMilestones([...result]));
       }
     };
 
@@ -50,24 +50,23 @@ function Dashboard() {
 
   return (
     <div className='p-5 md:p-7'>
-      <div className="flex justify-between items-center mb-5">
-        <h3 className='text-3xl'>Milestones</h3>
-        <input type='text' id='search' className='input w-1/4' onChange={(e)=>setSearch(e.target.value)} value={search} placeholder='Search...' />
-        <button className='btn flex items-center gap-2' onClick={()=>navigate("/milestone/add")}><MdAddCircle size={16}/> New Milestone</button>
-      </div>
-
-      {milestones.length === 0 && 
-      <div className='text-center'>
-        <h3 className='text-3xl text-primary'>Add your milestones...</h3>
-      </div>
-      }
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-        {milestones.length > 0 && milestones.map((milestone, index) => (
-            <MilestoneCard key={index} milestone={milestone} />
-        ))}
-      </div>   
+        <div className="flex justify-between items-center mb-5">
+            <h3 className='text-3xl'>My Milestones</h3>
+            <input type='text' id='search' className='input w-1/4' onChange={(e)=>setSearch(e.target.value)} value={search} placeholder='Search...' />
+            <button className='btn flex items-center gap-2' onClick={()=>navigate("/milestone/add")}><MdAddCircle size={16}/> New Milestone</button>
+        </div>
+        {milestones.length === 0 && 
+            <div className='text-center'>
+                <h3 className='text-3xl text-primary'>Add your milestones...</h3>
+            </div>
+        }
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
+            {milestones.length > 0 && milestones.map((milestone, index) => (
+                <MilestoneCard key={index} milestone={milestone} />
+            ))}
+        </div>   
     </div>
   )
 }
 
-export default Dashboard
+export default Milestones

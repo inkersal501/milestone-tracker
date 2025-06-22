@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateIsLogin } from '../store/authSlice';
 import { FiLogIn, FiLogOut } from "react-icons/fi"; 
@@ -8,11 +8,12 @@ import { FaUserCircle } from "react-icons/fa";
 function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const { user } = useSelector((state) => state.auth); 
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/');
+        window.location = '/';
     };
 
   return (
@@ -26,7 +27,10 @@ function Navbar() {
       <div className="flex items-center gap-6">
         {user ? (
           <>
-            <Link to="/dashboard" className="text-gray-700 hover:text-primary">
+            <Link to="/dashboard" className={`${location.pathname=='/dashboard'?'text-primary':'text-gray-700'}`}>
+              Dashboard
+            </Link> 
+            <Link to="/milestones" className={`${location.pathname=='/milestones'?'text-primary':'text-gray-700'}`}>
               My Milestones
             </Link> 
             <p className='text-primary flex items-center gap-2'><FaUserCircle size={18}/> Welcome, {user.username}</p>

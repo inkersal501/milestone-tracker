@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 
 function MilestoneCard({ milestone }) {
+
   const [isDue, setIsDue] = useState(false);
 
   const isFiveDaysLeft = (date) => {
@@ -20,6 +22,7 @@ function MilestoneCard({ milestone }) {
     setIsDue(isFiveDaysLeft(milestone.date));
   }, [milestone.date]);
 
+
   return (
     <div className="bg-white shadow-md rounded-2xl p-4 border border-gray-200">
       <div className="flex items-center justify-between mb-2">
@@ -37,8 +40,8 @@ function MilestoneCard({ milestone }) {
         </p>
       )}
 
-      <div className="flex justify-end gap-4">
-        <Link to={`/milestone/${milestone._id}/tips/new`} className="text-sm text-blue-600 hover:underline">Add Tips</Link>
+      <div className="flex justify-between gap-4"> 
+        <p className="flex gap-1 items-center m-0"><FaUserCircle size={18} color="#888"/> {milestone.userId.username}</p>
         <Link
           to={`/milestone/${milestone._id}/tips`}
           className="text-sm text-blue-600 hover:underline"
