@@ -109,4 +109,4 @@ npm run dev
 ## Author
 
 Built by **Inkersal Mahendran**  
-[LinkedIn](https://linkedin.com/in/inkersal) | [GitHub](https://github.com/inkersal501)
+[LinkedIn](https://linkedin.com/in/inkersal-mahendran) | [GitHub](https://github.com/inkersal501)
